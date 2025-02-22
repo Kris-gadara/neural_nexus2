@@ -102,7 +102,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          _drawerItem("Profile", Icons.person, context, const ProfileScreen()),
+          _drawerItem("Dashboard", Icons.dashboard, context, const HomeScreen()),
+          _drawerItem("Workout Tracker", Icons.fitness_center, context, const PlaceholderScreen("Workout Tracker")),
+          _drawerItem("Diet & Nutrition", Icons.fastfood, context, const PlaceholderScreen("Diet & Nutrition")),
+          _drawerItem("Heart Rate Monitor", Icons.favorite, context, const PlaceholderScreen("Heart Rate Monitor")),
+          _drawerItem("Sleep Analysis", Icons.nightlight_round, context, const PlaceholderScreen("Sleep Analysis")),
+          _drawerItem("AI Chatbot", Icons.rocket_launch, context, const AIBotScreen()),
           const Divider(),
           _drawerItem("Settings", Icons.settings, context, const PlaceholderScreen("Settings")),
           ListTile(
@@ -138,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-// Home Content Widget
+// Home Content Widget (Initial State)
 class HomeContent extends StatelessWidget {
   const HomeContent({super.key});
 
@@ -154,20 +159,9 @@ class HomeContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Health-Related Image at the Top
-          Container(
-            height: 150,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              image: const DecorationImage(
-                image: AssetImage("assets/health_image.jpg"), // Add your image asset
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+          // Welcome Section
           const SizedBox(height: 20),
 
-          // Welcome Section
           const Text(
             "Welcome Back!",
             textAlign: TextAlign.center,
@@ -189,91 +183,61 @@ class HomeContent extends StatelessWidget {
           ),
           const SizedBox(height: 30),
 
-          // Grid of Small Buttons
-          GridView.count(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisCount: 3, // 3 columns for smaller buttons
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            children: [
-              _buildSmallButton(Icons.dashboard, "Dashboard"),
-              _buildSmallButton(Icons.fitness_center, "Workout"),
-              _buildSmallButton(Icons.fastfood, "Diet"),
-              _buildSmallButton(Icons.favorite, "Heart"),
-              _buildSmallButton(Icons.nightlight_round, "Sleep"),
-              _buildSmallButton(Icons.rocket_launch, "AI Bot"),
-            ],
-          ),
-          const SizedBox(height: 30),
-
-          // Doctors List Section
-          const Text(
-            "Nearby Doctors",
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: Colors.teal,
+          // Email Field
+          TextField(
+            controller: TextEditingController(),
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+              labelText: "Email",
+              prefixIcon: const Icon(Icons.email, color: Colors.teal),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              filled: true,
+              fillColor: Colors.white,
             ),
           ),
-          const SizedBox(height: 10),
-          _buildDoctorsList(),
-        ],
-      ),
-    );
-  }
+          const SizedBox(height: 15),
 
-  // Small Button Widget
-  Widget _buildSmallButton(IconData icon, String label) {
-    return ElevatedButton(
-      onPressed: () {
-        // Handle button press
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.teal,
-        padding: const EdgeInsets.all(10),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, size: 30, color: Colors.white),
-          const SizedBox(height: 5),
-          Text(
-            label,
-            style: const TextStyle(fontSize: 12, color: Colors.white),
+          // Password Field
+          TextField(
+            controller: TextEditingController(),
+            obscureText: true,
+            decoration: InputDecoration(
+              labelText: "Password",
+              prefixIcon: const Icon(Icons.lock, color: Colors.teal),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              filled: true,
+              fillColor: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 20),
+
+          // Login Button
+          ElevatedButton(
+            onPressed: () {
+              // Navigate to HomeScreen on successful login
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.teal,
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            child: const Text(
+              "Login",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildDoctorsList() {
-    final List<String> doctors = [
-      "Dr. Gadara Krishna",
-      "Dr. Dharmik",
-      "Dr. Fitness Fi...",
-      "Dr. Yash",
-      "Dr. Bharat Na...",
-      "Dr. Tej",
-      "Dr. Ayub",
-    ];
-
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: doctors.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          leading: const Icon(Icons.person, color: Colors.teal),
-          title: Text(doctors[index]),
-          onTap: () {
-            // Handle doctor selection
-          },
-        );
-      },
     );
   }
 }
@@ -282,7 +246,7 @@ class HomeContent extends StatelessWidget {
 class PlaceholderScreen extends StatelessWidget {
   final String title;
 
-  const PlaceholderScreen(this.title);
+  const PlaceholderScreen(this.title, {super.key});
 
   @override
   Widget build(BuildContext context) {
