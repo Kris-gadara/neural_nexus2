@@ -1,0 +1,1 @@
+ K:\\Neural\ Nexus\\neural_nexus2\\.dart_tool\\flutter_build\\cdbd33310f8e4eca2e0fceb2c190f985\\native_assets.json: 
