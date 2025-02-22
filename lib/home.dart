@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'login.dart'; // Import LoginScreen
 import 'aibot.dart'; // Import AI Chatbot page
 import 'profile.dart'; // Import ProfileScreen
+import 'ChatBotAPI.dart'; // Import the updated ChatBotAPI
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

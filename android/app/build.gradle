@@ -10,17 +10,17 @@ android {
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = '1.8'  // Simplified to string literal
+        targetCompatibility = '1.8'  // Simplified to string literal
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = '1.8'  // Simplified to string literal
     }
 
     defaultConfig {
         applicationId = "com.example.neural_nexus2"
-        minSdk = 16  // Default Flutter min SDK
+        minSdk = 16
         targetSdk = 34
         versionCode = flutter.versionCode
         versionName = flutter.versionName

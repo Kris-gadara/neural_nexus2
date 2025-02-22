@@ -17,12 +17,3 @@ allprojects {
         mavenCentral()
     }
 }
-
-subprojects {
-    afterEvaluate {
-        android {
-            compileSdkVersion 34
-            namespace "com.example.neural_nexus2"
-        }
-    }
-}
