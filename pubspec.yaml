@@ -8,12 +8,9 @@ environment:
   sdk: ^3.6.2
 
 dependencies:
-
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  http: ^1.2.0  # Use the latest version from pub.dev
-
 
 dev_dependencies:
   flutter_test:
